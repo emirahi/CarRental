@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Core.Entities;
+using Core.Utilities;
 using DataAccess.Abstract;
 using Entity.ConCreate;
 using Entity.DTOs;
@@ -17,34 +18,37 @@ namespace Business.ConCreate
             _carDal = entity;
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
             _carDal.Add(car);
+            return new SuccessResult();
         }
 
-        public void delete(Car car)
+        public IResult delete(Car car)
         {
             _carDal.Delete(car);
+            return new SuccessResult();
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
+        {            
+            return new SuccessDataResult<List<Car>>(_carDal.GetALL());
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _carDal.GetALL();
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetail());
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<CarDetailDto> GetCarsById(int carId)
         {
-            return _carDal.GetCarDetail();
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailID(carId));
         }
 
-        public CarDetailDto GetCarsById(int carId)
-        {
-            return _carDal.GetCarDetailID(carId);
-        }
-
-        public void update(Car car)
+        public IResult update(Car car)
         {
             _carDal.Update(car);
+            return new SuccessResult();
         }
     }
 }
