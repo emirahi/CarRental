@@ -10,7 +10,7 @@ using System.Linq;
 using System.Linq.Expressions;
 
 
-namespace DataAccess.ConCreate
+namespace DataAccess.ConCreate.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, CarProjectContext>, ICarDal
     {
@@ -19,7 +19,7 @@ namespace DataAccess.ConCreate
             using (CarProjectContext context = new CarProjectContext())
             {
                 var result = from c in context.Cars
-                             where c.Id == id                             
+                             where c.Id == id
                              join b in context.Brands
                              on c.BrandId equals b.BrandId
                              join k in context.Colors
@@ -46,7 +46,7 @@ namespace DataAccess.ConCreate
                 var result = from c in context.Cars
                              join b in context.Brands
                              on c.BrandId equals b.BrandId
-                             join k in context.Colors
+                             join k  in context.Colors                             
                              on c.ColorId equals k.ColorId
                              select new CarDetailDto
                              {

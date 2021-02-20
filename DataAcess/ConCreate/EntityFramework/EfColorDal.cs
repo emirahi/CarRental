@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccess.ConCreate
+namespace DataAccess.ConCreate.EntityFramework
 {
     public class EfColorDal:EfEntityRepositoryBase<Color,CarProjectContext>
     {

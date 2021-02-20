@@ -21,6 +21,34 @@ CREATE TABLE Brands(
 	BrandName nvarchar(50)
 )
 
+/* Id,FirstName,LastName,Email,Password */
+CREATE TABLE Users(
+	UsersId int primary key identity(1,1),
+	FirstName varchar(75),
+	LastName varchar(75),
+	Email varchar(75),
+	Password varchar(75),
+)
+
+/* UserId,CompanyName */
+Create TABLE Customers(
+	CustomerId int primary key identity(1,1),
+	CompanyName varchar(75),
+	UserId int NOT NULL
+)
+/*
+Id,CarId,CustomerId,RentDate(Kiralama Tarihi)
+,ReturnDate(Teslim Tarihi). 
+Araba teslim edilmemişse ReturnDate null'dır.
+*/
+CREATE TABLE Rentals(
+RentalsId int primary key identity(1,1),
+CarId int NOT NULL,
+CustomerId int NOT NULL,
+RentDate Datetime,
+ReturnDate Datetime
+)
+
 INSERT INTO Cars(BrandId, ColorId, ModelYear, DailyPrice, Descriptions)
 VALUES
 	(1, 2, 2019, 650, 'BMW M2 COMPETITION'),
@@ -45,7 +73,29 @@ VALUES
 	('Gold'),
 	('Silver');
 
+INSERT INTO Users(FirstName,LastName,Email,Password)
+VALUES ('Emir','Ahi','emirahi45@gmail.com','sifre1'),
+	   ('Orhan','Veli Kanık','orhan.veli@gmail.com','sifre2');
+
+INSERT INTO Customers(CompanyName,UserId)
+VALUES ('Şirket1',1),
+	   ('Şirket2',2);
+
+INSERT INTO Rentals(CarId,CustomerId,RentDate,ReturnDate)
+VALUES 
+(1,2,CAST('2021-02-15' AS datetime),CAST('2021-02-21' AS datetime)),
+(2,1,CAST('2021-02-22' AS datetime),CAST('2021-02-25' AS datetime))
+
+
 SELECT * FROM Cars;
 SELECT * FROM Brands;
 SELECT * FROM Colors;
+SELECT * FROM Users;
+SELECT * FROM Customers;
+SELECT * FROM Rentals;
 
+/* 2 tablo birleştirme kısaca join işlemi */
+SELECT CompanyName,FirstName,LastName,Email,Password 
+FROM Customers c
+join Users u
+on c.UserId = u.UsersId
