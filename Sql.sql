@@ -83,8 +83,8 @@ VALUES ('Şirket1',1),
 
 INSERT INTO Rentals(CarId,CustomerId,RentDate,ReturnDate)
 VALUES 
-(1,2,CAST('2021-02-15' AS datetime),CAST('2021-02-21' AS datetime)),
-(2,1,CAST('2021-02-22' AS datetime),CAST('2021-02-25' AS datetime))
+(1,2,CAST('2021-02-15' AS datetime),null),
+(2,1,CAST('2021-02-22' AS datetime),null)
 
 
 SELECT * FROM Cars;
