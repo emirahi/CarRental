@@ -49,6 +49,15 @@ RentDate Datetime,
 ReturnDate Datetime
 )
 
+/* CarImages (Araba Resimleri) tablosu oluşturunuz. (Id,CarId,ImagePath,Date) Bir arabanın birden fazla resmi olabilir.
+ */
+ CREATE TABLE CarImages(
+ Id INT PRIMARY KEY IDENTITY(1,1),
+ CarId INT,
+ ImagePath VARCHAR(200),
+ ImageDate DATE
+ )
+
 INSERT INTO Cars(BrandId, ColorId, ModelYear, DailyPrice, Descriptions)
 VALUES
 	(1, 2, 2019, 650, 'BMW M2 COMPETITION'),
@@ -93,7 +102,7 @@ SELECT * FROM Colors;
 SELECT * FROM Users;
 SELECT * FROM Customers;
 SELECT * FROM Rentals;
-
+Select * FROM CarImages;
 /* 2 tablo birleştirme kısaca join işlemi */
 SELECT CompanyName,FirstName,LastName,Email,Password 
 FROM Customers c

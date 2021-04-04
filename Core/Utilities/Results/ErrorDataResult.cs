@@ -6,10 +6,10 @@ namespace Core.Utilities
 {
     public class ErrorDataResult<T>:DataResult<T>
     {
-        public ErrorDataResult(bool Success, T Data) :base(Success,Data)
+        public ErrorDataResult(T Data) :base(false,Data)
         {
         }
-        public ErrorDataResult(bool Success,string Message,T Data):base(Success,Message,Data)
+        public ErrorDataResult(string Message,T Data):base(false,Message,Data)
         {
         }
     }
