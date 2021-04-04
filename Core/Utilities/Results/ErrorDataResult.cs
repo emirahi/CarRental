@@ -12,5 +12,10 @@ namespace Core.Utilities
         public ErrorDataResult(bool Success,string Message,T Data):base(Success,Message,Data)
         {
         }
+        public ErrorDataResult(bool Success,string Message):base(Success,Message)
+        {
+
+        }
+
     }
 }

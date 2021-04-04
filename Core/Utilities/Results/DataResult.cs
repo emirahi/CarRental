@@ -15,5 +15,9 @@ namespace Core.Utilities
         {            
             this.Data = Data;
         }
+
+        public DataResult(bool Success, string Message) : base(Success, Message)
+        {
+        }
     }
 }
