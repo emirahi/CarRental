@@ -62,6 +62,15 @@ namespace DataAccess.ConCreate.EntityFramework
                 return result.ToList();
             }
         }
+
+        public Car GetById(int id)
+        {
+            using (CarProjectContext context = new CarProjectContext())
+            {
+                return context.Cars.SingleOrDefault(c => c.Id == id);
+            }
+        }
+    
     }
 }
 

@@ -34,6 +34,11 @@ namespace Business.ConCreate
             return new SuccessDataResult<List<User>>(_userDal.GetALL());
         }
 
+        public IDataResult<User> GetById(User entity)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.UsersId == entity.UsersId));
+        }
+
         public IDataResult<List<UserDetailDto>> GetUserDetails()
         {
             return new SuccessDataResult<List<UserDetailDto>>(_userDal.GetUserDetails());

@@ -33,6 +33,11 @@ namespace Business.ConCreate
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetALL());
         }
 
+        public IDataResult<Rental> GetById(Rental entity)
+        {
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalsId == entity.RentalsId));
+        }
+
         public IDataResult<RentalDetailDto> GetRentalByBrandModel(string brandModel)
         {
             return new SuccessDataResult<RentalDetailDto>(_rentalDal.GetRentalByBrandModel(brandModel));

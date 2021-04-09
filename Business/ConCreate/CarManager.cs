@@ -39,6 +39,11 @@ namespace Business.ConCreate
             return new SuccessDataResult<List<Car>>(_carDal.GetALL());
         }
 
+        public IDataResult<Car> GetById(Car entity)
+        {
+            return new SuccessDataResult<Car>(_carDal.GetById(entity.Id));
+        }
+
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetail());
