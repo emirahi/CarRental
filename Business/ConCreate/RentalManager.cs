@@ -16,6 +16,7 @@ namespace Business.ConCreate
         {
             _rentalDal = rentalDal;
         }
+
         public IResult Add(Rental rental)
         {
             _rentalDal.Add(rental);

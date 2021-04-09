@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace DataAccess.ConCreate.EntityFramework
 {
-    public class EfBrand : EfEntityRepositoryBase<Brand, CarProjectContext>, IBrandDal
+    public class EfBrandDal : EfEntityRepositoryBase<Brand, CarProjectContext>, IBrandDal
     {
 
     }
