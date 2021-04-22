@@ -27,7 +27,9 @@ CREATE TABLE Users(
 	FirstName varchar(75),
 	LastName varchar(75),
 	Email varchar(75),
-	Password varchar(75),
+	Password binary(500),
+	PasswordSalt binary(500),
+	Status bit
 )
 
 /* UserId,CompanyName */
@@ -58,6 +60,17 @@ ReturnDate Datetime
  ImageDate DATE
  )
 
+ CREATE TABLE OperationClaims(
+Id INT PRIMARY KEY IDENTITY(1,1),
+Name VARCHAR(250) NOT NULL
+ )
+
+ CREATE TABLE UserOperationClaims(
+ Id INT PRIMARY KEY IDENTITY(1,1),
+ UserId INT,
+ OperationClaimId INT
+ )
+	
 INSERT INTO Cars(BrandId, ColorId, ModelYear, DailyPrice, Descriptions)
 VALUES
 	(1, 2, 2019, 650, 'BMW M2 COMPETITION'),
@@ -82,9 +95,6 @@ VALUES
 	('Gold'),
 	('Silver');
 
-INSERT INTO Users(FirstName,LastName,Email,Password)
-VALUES ('Emir','Ahi','emirahi45@gmail.com','sifre1'),
-	   ('Orhan','Veli Kanık','orhan.veli@gmail.com','sifre2');
 
 INSERT INTO Customers(CompanyName,UserId)
 VALUES ('Şirket1',1),
