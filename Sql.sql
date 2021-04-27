@@ -118,3 +118,6 @@ SELECT CompanyName,FirstName,LastName,Email,Password
 FROM Customers c
 join Users u
 on c.UserId = u.UsersId
+
+
+truncate table Users;

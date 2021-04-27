@@ -9,8 +9,12 @@ namespace Core.Utilities
         public ErrorDataResult(T Data) :base(false,Data)
         {
         }
+
+
         public ErrorDataResult(string Message,T Data):base(false,Message,Data)
         {
         }
+
+
     }
 }

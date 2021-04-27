@@ -12,5 +12,7 @@ namespace Business.Abstract
     {
         IDataResult<UserDetailDto> GetUsersByFirstName(string FirstName);
         IDataResult<List<UserDetailDto>> GetUserDetails();
+        IDataResult<List<OperationClaim>> GetClaims(User user);
+        IDataResult<User> GetByMail(string email);
     }
 }
