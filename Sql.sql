@@ -27,8 +27,8 @@ CREATE TABLE Users(
 	FirstName varchar(75),
 	LastName varchar(75),
 	Email varchar(75),
-	Password binary(500),
-	PasswordSalt binary(500),
+	Password varbinary(500),
+	PasswordSalt varbinary(500),
 	Status bit
 )
 
@@ -137,6 +137,3 @@ INNER JOIN OperationClaims on OperationClaims.Id = UOC.UserId;
 
 
 SELECT * FROM Users
-
-DELETE Users WHERE UsersId = 2
-
