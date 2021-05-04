@@ -45,9 +45,9 @@ namespace Business.ConCreate
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>(Message.UserNotFound,userToCheck);
-            }
+            }             
 
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Password, userToCheck.PasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Password,userToCheck.PasswordSalt))
             {
                 return new ErrorDataResult<User>(Message.PasswordError, userToCheck);
             }
@@ -57,11 +57,12 @@ namespace Business.ConCreate
 
         public IResult UserExists(string email)
         {
-            if (_userService.GetByMail(email) != null)
+            var data = _userService.GetByMail(email);
+            if (data.Data == null)
             {
-                return new ErrorResult(Message.UserAlreadyExists);
+                return new ErrorResult();
             }
-            return new SuccessResult();
+            return new SuccessResult(Message.UserAlreadyExists);
         }
 
         public IDataResult<AccessToken> CreateAccessToken(User user)

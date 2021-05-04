@@ -1,5 +1,6 @@
 using Business.Abstract;
 using Business.ConCreate;
+using Core.Utilities.Ioc;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
@@ -61,6 +62,10 @@ namespace WebApi
             //services.AddSingleton<ICarDal,EfCarDal>();
             //services.AddSingleton<IRentalDal, EfRentalDal>();
             //services.AddSingleton<IUserDal,EfUserDal>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            ServiceTool.Create(services);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -37,6 +37,7 @@ namespace Business.ConCreate
             return new SuccessResult();
         }
 
+        
         public IDataResult<List<Car>> GetAll()
         {            
             return new SuccessDataResult<List<Car>>(_carDal.GetALL());

@@ -110,9 +110,12 @@ SELECT * FROM Cars;
 SELECT * FROM Brands;
 SELECT * FROM Colors;
 SELECT * FROM Users;
+SELECT * FROM UserOperationClaims;
+SELECT * FROM OperationClaims;
 SELECT * FROM Customers;
 SELECT * FROM Rentals;
 Select * FROM CarImages;
+
 /* 2 tablo birleştirme kısaca join işlemi */
 SELECT CompanyName,FirstName,LastName,Email,Password 
 FROM Customers c
@@ -121,3 +124,19 @@ on c.UserId = u.UsersId
 
 
 truncate table Users;
+
+USE CarDB;
+SELECT * FROM Users;
+SELECT * FROM UserOperationClaims;
+SELECT * FROM OperationClaims;
+
+SELECT UOC.Id,Users.Email,Users.Status,OperationClaims.Name
+FROM UserOperationClaims UOC 
+INNER JOIN Users ON UOC.UserId = Users.UsersId
+INNER JOIN OperationClaims on OperationClaims.Id = UOC.UserId;
+
+
+SELECT * FROM Users
+
+DELETE Users WHERE UsersId = 2
+
