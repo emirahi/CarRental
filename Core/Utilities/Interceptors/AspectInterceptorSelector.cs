@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using Core.Aspects.Autofac.Performance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,12 @@ namespace Core.Utilities.Interceptors
                 (true).ToList();
             var methodAttributes = type.GetMethod(method.Name)
                 .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
-            classAttributes.AddRange(methodAttributes);            
+            classAttributes.AddRange(methodAttributes);
+            classAttributes.Add(new PerformanceAspect(7)); 
+            /*
+             * her bir methodum için 7 saniye çalışma süresi veriyorum 7 saniyeden fazla çalışırsa 
+             * bildirmesini istiyorum.
+             */
 
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }

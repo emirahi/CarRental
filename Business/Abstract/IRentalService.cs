@@ -8,9 +8,14 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IRentalService : IBaseService<Rental>
+    public interface IRentalService
     { 
         IDataResult<RentalDetailDto> GetRentalByBrandModel(string brandModel);
         IDataResult<List<RentalDetailDto>> GetRentalsDetails();
+        IResult Add(Rental entity);
+        IResult update(Rental entity);
+        IResult delete(Rental entity);
+        IDataResult<List<Rental>> GetAll();
+        IDataResult<Rental> GetById(Rental entity);
     }
 }

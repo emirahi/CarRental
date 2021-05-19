@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Core.Utilities.Ioc
 {
+    //using Microsoft.Extensions.DependencyInjection; eklemeyi unutma
     public static class ServiceTool
     {
         public static IServiceProvider ServiceProvider { get; private set; }

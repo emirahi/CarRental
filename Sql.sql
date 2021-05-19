@@ -137,3 +137,4 @@ INNER JOIN OperationClaims on OperationClaims.Id = UOC.UserId;
 
 
 SELECT * FROM Users
+-- TRUNCATE TABLE Users;

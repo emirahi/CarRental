@@ -7,8 +7,13 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IBrandService:IBaseService<Brand>
+    public interface IBrandService
     {
+        IResult Add(Brand entity);
+        IResult update(Brand entity);
+        IResult delete(Brand entity);
+        IDataResult<List<Brand>> GetAll();
+        IDataResult<Brand> GetById(Brand entity);
 
     }
 }

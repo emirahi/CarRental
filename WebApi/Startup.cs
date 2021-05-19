@@ -1,5 +1,7 @@
 using Business.Abstract;
 using Business.ConCreate;
+using Core.DependencyResolvers;
+using Core.Extensions;
 using Core.Utilities.Ioc;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
@@ -36,7 +38,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -53,6 +55,10 @@ namespace WebApi
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
+            services.AddDependencyResolvers(new ICoreModule[] {
+                new CoreModule()
+            });
+            
 
 
             //services.AddSingleton<ICarService,CarManager>();
@@ -62,9 +68,6 @@ namespace WebApi
             //services.AddSingleton<ICarDal,EfCarDal>();
             //services.AddSingleton<IRentalDal, EfRentalDal>();
             //services.AddSingleton<IUserDal,EfUserDal>();
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            ServiceTool.Create(services);
 
         }
 
