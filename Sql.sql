@@ -138,3 +138,27 @@ INNER JOIN OperationClaims on OperationClaims.Id = UOC.UserId;
 
 SELECT * FROM Users
 -- TRUNCATE TABLE Users;
+
+/*
+var query = from b in context.Brands
+            join c in context.Cars
+            on b.BrandName equals brandName
+            join color in context.Colors
+            on c.ColorId equals color.ColorId
+            where c.BrandId == b.BrandId
+            select new CarByBrandDto
+            {
+                Id = c.Id,
+                BrandName = b.BrandName,
+                ColorName = color.ColorName,
+                DailyPrice = c.DailyPrice,
+                ModelYear = c.ModelYear,
+                Descriptions = c.Descriptions
+*/
+
+SELECT * FROM Cars c 
+join  Brands b 
+on b.BrandName = 'BMW'
+join Colors color
+on c.ColorId = color.ColorId
+where c.BrandId = b.BrandId

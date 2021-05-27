@@ -14,6 +14,41 @@ namespace DataAccess.ConCreate.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, CarProjectContext>, IRentalDal
     {
+        public List<RentalOfCar> GetAllRentalOfCars()
+        {
+            using (CarProjectContext context = new CarProjectContext())
+            {
+                var result = from r in context.Rentals
+                             join c in context.Cars
+                             on r.CarId equals c.Id
+
+                             join b in context.Brands
+                             on c.BrandId equals b.BrandId
+
+                             join customer in context.Customers
+                             on r.CustomerId equals customer.CustomerId
+
+                             join color in context.Colors
+                             on  c.ColorId equals color.ColorId
+                             
+                             join user in context.Users
+                             on customer.UserId equals user.UsersId
+
+                             select new RentalOfCar
+                             {
+                                 CarId = c.Id,
+                                 RentalsId = r.RentalsId,
+                                 brandName = b.BrandName,
+                                 colorName = color.ColorName,
+                                 userName = user.FirstName + " " + user.LastName,
+                                 RentDate = r.RentDate,
+                                 ReturnDate = r.ReturnDate
+                             };
+
+                return result.ToList();
+
+            }
+        }
 
         public RentalDetailDto GetRentalByBrandModel(string brandModel)
         {

@@ -7,6 +7,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Entities;
 using Core.Utilities;
+using Core.Utilities.Business;
 using DataAccess.Abstract;
 using Entity.ConCreate;
 using Entity.DTOs;
@@ -47,6 +48,23 @@ namespace Business.ConCreate
             return new SuccessDataResult<List<Car>>(_carDal.GetALL());
         }
 
+        [CacheAspect()]
+        public IDataResult<List<CarDto>> GetAllDto()
+        {
+            return new SuccessDataResult<List<CarDto>>(_carDal.GetAllDto());
+        }
+
+        [ValidationAspect(typeof(CarByBrandValidator))]
+        public IDataResult<List<CarByBrandDto>> GetByBrandName(string brandName)
+        {
+            return new SuccessDataResult<List<CarByBrandDto>>(_carDal.GetByBrandName(brandName));
+        }
+
+        public IDataResult<List<CarByColorDto>> GetByColorName(string colorName)
+        {
+            return new SuccessDataResult<List<CarByColorDto>>(_carDal.GetByColorName(colorName));
+        }
+
         public IDataResult<Car> GetById(Car entity)
         {
             return new SuccessDataResult<Car>(_carDal.GetById(entity.Id));
@@ -67,5 +85,11 @@ namespace Business.ConCreate
             _carDal.Update(car);
             return new SuccessResult();
         }
+
+        private bool CarDtoListLenght(List<CarDto> carDtoList)
+        {
+            return carDtoList.Count > 0 ? true : false;
+        }
+
     }
 }

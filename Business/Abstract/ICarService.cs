@@ -17,6 +17,10 @@ namespace Business.Abstract
         IResult delete(Car entity);
         IDataResult<List<Car>> GetAll();
         IDataResult<Car> GetById(Car entity);
+        IDataResult<List<CarByBrandDto>> GetByBrandName(string brandName);
+        IDataResult<List<CarByColorDto>> GetByColorName(string colorName);
+        IDataResult<List<CarDto>> GetAllDto();
+
     }
 }
 

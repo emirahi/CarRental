@@ -33,6 +33,18 @@ namespace WebApi.Controllers
             return BadRequest(result.Message);
         }
 
+        [HttpGet("GetAllDto")]
+        public IActionResult GetAllDto()
+        {
+            var result = _carService.GetAllDto();
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+
         [HttpGet("GetById")]
         public IActionResult GetById(int id)
         {
@@ -76,6 +88,28 @@ namespace WebApi.Controllers
                 return Ok(result.Message);
             }
             return BadRequest(result.Message);
+        }
+
+        [HttpGet("GetByBrandName")]
+        public IActionResult GetByBrandName(string brandName)
+        {
+            var result = _carService.GetByBrandName(brandName);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        
+        [HttpGet("GetByColorName")]
+        public IActionResult GetByColorName(string colorName)
+        {
+            var result = _carService.GetByColorName(colorName);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }
