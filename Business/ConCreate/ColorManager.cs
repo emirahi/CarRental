@@ -2,6 +2,7 @@
 using Core.Utilities;
 using DataAccess.Abstract;
 using Entity.ConCreate;
+using Entity.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +18,8 @@ namespace Business.ConCreate
         }
         public IResult Add(Color entity)
         {
-            throw new NotImplementedException();
+            _colorDal.Add(entity);
+            return new SuccessResult();
         }
 
         public IResult delete(Color entity)
@@ -29,6 +31,16 @@ namespace Business.ConCreate
         public IDataResult<List<Color>> GetAll()
         {
             return new SuccessDataResult<List<Color>>(_colorDal.GetALL());
+        }
+
+        public IDataResult<List<CarByColorDto>> GetByColorId(int colorId)
+        {
+            var result = _colorDal.GetByColorId(colorId);
+            if (result.Count > 0)
+            {
+                return new SuccessDataResult<List<CarByColorDto>>(result);
+            }
+            return new ErrorDataResult<List<CarByColorDto>>(result);
         }
 
         public IDataResult<Color> GetById(Color entity)

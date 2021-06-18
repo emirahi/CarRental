@@ -14,9 +14,13 @@ namespace WebApi.Controllers
     public class CarsController : ControllerBase
     {
         ICarService _carService;
-        public CarsController(ICarService carService)
+        IColorService _colorService;
+        IBrandService _brandService;
+        public CarsController(ICarService carService,IColorService colorService,IBrandService brandService)
         {
             _carService = carService;
+            _colorService = colorService;
+            _brandService = brandService;
         }
 
         //https://localhost:44320/api/Cars/GetAll
@@ -90,10 +94,10 @@ namespace WebApi.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpGet("GetByBrandName")]
-        public IActionResult GetByBrandName(string brandName)
+        [HttpGet("GetByBrandId")]
+        public IActionResult GetByBrandId(int brandId)
         {
-            var result = _carService.GetByBrandName(brandName);
+            var result = _brandService.GetByBrandId(brandId);
             if (result.Success)
             {
                 return Ok(result);
@@ -101,10 +105,32 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
         
-        [HttpGet("GetByColorName")]
-        public IActionResult GetByColorName(string colorName)
+        [HttpGet("GetByColorId")]
+        public IActionResult GetByColorId(int colorId)
         {
-            var result = _carService.GetByColorName(colorName);
+            var result = _colorService.GetByColorId(colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("GetSearchList")]
+        public IActionResult GetSearchList(int brandId, int colorId)
+        {
+            var result = _carService.GetBySearch(brandId, colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("GetCarDetails")]
+        public IActionResult GetCarDetails(int carId)
+        {
+            var result = _carService.GetCarsById(carId);
             if (result.Success)
             {
                 return Ok(result);

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspects.Autofac;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Transaction;
@@ -25,7 +26,7 @@ namespace Business.ConCreate
             _carDal = entity;
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.GetAll")]
         [TransactionScopeAspect]
@@ -54,20 +55,19 @@ namespace Business.ConCreate
             return new SuccessDataResult<List<CarDto>>(_carDal.GetAllDto());
         }
 
-        [ValidationAspect(typeof(CarByBrandValidator))]
-        public IDataResult<List<CarByBrandDto>> GetByBrandName(string brandName)
-        {
-            return new SuccessDataResult<List<CarByBrandDto>>(_carDal.GetByBrandName(brandName));
-        }
-
-        public IDataResult<List<CarByColorDto>> GetByColorName(string colorName)
-        {
-            return new SuccessDataResult<List<CarByColorDto>>(_carDal.GetByColorName(colorName));
-        }
-
         public IDataResult<Car> GetById(Car entity)
         {
             return new SuccessDataResult<Car>(_carDal.GetById(entity.Id));
+        }
+
+        public IDataResult<List<CarSearchDto>> GetBySearch(int brandId, int colorId)
+        {
+            var result = _carDal.CarSearches(brandId, colorId);
+            if (result.Count > 0)
+            {
+                return new SuccessDataResult<List<CarSearchDto>>(result);
+            }
+            return new ErrorDataResult<List<CarSearchDto>>(Message.CarCountLenghtError,result);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
@@ -77,7 +77,12 @@ namespace Business.ConCreate
 
         public IDataResult<CarDetailDto> GetCarsById(int carId)
         {
-            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailID(carId));
+            var result = _carDal.GetCarDetailID(carId);
+            if (result != null)
+            {
+                return new SuccessDataResult<CarDetailDto>(result);
+            }
+            return new ErrorDataResult<CarDetailDto>(Message.CarNotFound, result);
         }
 
         public IResult update(Car car)

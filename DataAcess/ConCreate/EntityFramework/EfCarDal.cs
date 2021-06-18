@@ -71,53 +71,6 @@ namespace DataAccess.ConCreate.EntityFramework
             }
         }
 
-        public List<CarByBrandDto> GetByBrandName(string brandName)
-        {
-            using (CarProjectContext context = new CarProjectContext())
-            {
-                var query = from b in context.Brands
-                            join c in context.Cars
-                            on b.BrandName equals brandName
-                            join color in context.Colors
-                            on c.ColorId equals color.ColorId
-                            where c.BrandId == b.BrandId
-                            select new CarByBrandDto
-                            {
-                                Id = c.Id,
-                                BrandName = b.BrandName,
-                                ColorName = color.ColorName,
-                                DailyPrice = c.DailyPrice,
-                                ModelYear = c.ModelYear,
-                                Descriptions = c.Descriptions
-                            };
-                var q = query.ToList();
-
-                return query.ToList();
-            }
-        }
-
-        public List<CarByColorDto> GetByColorName(string colorName)
-        {
-            using (CarProjectContext context = new CarProjectContext())
-            {
-                var query = from color in context.Colors
-                            join c in context.Cars
-                            on color.ColorName equals colorName
-                            join b in context.Brands
-                            on c.BrandId equals b.BrandId
-                            select new CarByColorDto
-                            {
-                                Id = c.Id,
-                                BrandName = b.BrandName,
-                                ColorName = color.ColorName,
-                                DailyPrice = c.DailyPrice,
-                                ModelYear = c.ModelYear,
-                                Descriptions = c.Descriptions
-                            };
-                return query.ToList();
-            }
-        }
-
         public List<CarDto> GetAllDto()
         {
             using (CarProjectContext context = new CarProjectContext())
@@ -139,6 +92,30 @@ namespace DataAccess.ConCreate.EntityFramework
                 return result.ToList();
             }
         }
+
+        public List<CarSearchDto> CarSearches(int brandId, int colorId)
+        {
+            using (CarProjectContext context = new CarProjectContext())
+            {
+                var query = from car in context.Cars
+                             join color in context.Colors
+                             on car.ColorId equals color.ColorId
+
+                             join brand in context.Brands
+                             on car.BrandId equals brand.BrandId
+                             where car.ColorId == colorId && car.BrandId == brandId
+                             select new CarSearchDto
+                             {
+                                 Id = car.Id,
+                                 BrandName = brand.BrandName,
+                                 ColorName = color.ColorName,
+                                 ModelYear = car.ModelYear,
+                                 DailyPrice = car.DailyPrice,
+                                 Descriptions = car.Descriptions
+                             };
+                var result = query.ToList();
+                return result;
+            }
+        }
     }
 }
-

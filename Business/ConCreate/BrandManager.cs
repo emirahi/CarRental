@@ -3,6 +3,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Utilities;
 using DataAccess.Abstract;
 using Entity.ConCreate;
+using Entity.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,6 +34,16 @@ namespace Business.ConCreate
         public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_BrandDal.GetALL());
+        }
+
+        public IDataResult<List<CarByBrandDto>> GetByBrandId(int brandId)
+        {
+            var result = _BrandDal.GetByBrandId(brandId);
+            if (result.Count > 0)
+            {
+                return new SuccessDataResult<List<CarByBrandDto>>(result);
+            }
+            return new ErrorDataResult<List<CarByBrandDto>>("Listelenicek Veri Mevcut değil", result);
         }
 
         public IDataResult<Brand> GetById(Brand entity)

@@ -1,6 +1,7 @@
 ﻿using Core.Utilities;
 using Core.Utilities.Business;
 using Entity.ConCreate;
+using Entity.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,8 @@ namespace Business.Abstract
         IResult delete(Brand entity);
         IDataResult<List<Brand>> GetAll();
         IDataResult<Brand> GetById(Brand entity);
+
+        IDataResult<List<CarByBrandDto>> GetByBrandId(int brandId);
 
     }
 }

@@ -70,29 +70,37 @@ Name VARCHAR(250) NOT NULL
  UserId INT,
  OperationClaimId INT
  )
-	
+
 INSERT INTO Cars(BrandId, ColorId, ModelYear, DailyPrice, Descriptions)
 VALUES
-	(1, 2, 2019, 650, 'BMW M2 COMPETITION'),
-	(2, 3, 2016, 500,'AUDI A3 SEDAN'),
-	(4, 1, 2017, 1000, 'ALFA ROMEO GIULIETTA'),
-	(1, 5, 2016, 750, 'BMW M4 SPECIFICATIONS'),
-	(5, 4, 2020, 900, 'AUDI S4');
+	(1, 1, 2016, 1650, 'BMW M2 COMPETITION V1'),
+	(1, 2, 2017, 2650, 'BMW M2 COMPETITION V2'),
+	(1, 3, 2018, 3650, 'BMW M2 COMPETITION V3'),
+	(1, 4, 2019, 4650, 'BMW M2 COMPETITION V4'),
+	(1, 5, 2020, 5650, 'BMW M2 COMPETITION V5'),
+
+	(2, 1, 2016, 1650, 'AUDI Q7'),
+	(2, 2, 2017, 2650, 'AUDI Q8'),
+	(2, 3, 2018, 3650, 'AUDI S3'),
+	(2, 4, 2019, 4650, 'AUDI S4'),
+	(2, 5, 2020, 5650, 'AUDI S5'),
+
+	(3, 1, 2016, 1650, 'ALFA ROMEO GIULA V1'),
+	(3, 2, 2017, 2650, 'ALFA ROMEO GIULA V2'),
+	(3, 3, 2018, 3650, 'ALFA ROMEO GIULA V3'),
+	(3, 4, 2019, 4650, 'ALFA ROMEO GIULA V4'),
+	(3, 5, 2020, 5650, 'ALFA ROMEO GIULA V5');
+
 
 INSERT INTO Brands(BrandName)
 VALUES
-	('BMW'),
-	('AUDI'),
-	('ALFA ROMEO'),
-	('BMW'),
-	('AUDI');
+	('BMW'),('AUDI'),
+	('ALFA ROMEO')
 
 INSERT INTO Colors(ColorName)
 VALUES
-	('Black'),
-	('Red'),
-	('Gray'),
-	('Gold'),
+	('Black'),('Red'),
+	('Gray'),('Gold'),
 	('Silver');
 
 
@@ -139,26 +147,15 @@ INNER JOIN OperationClaims on OperationClaims.Id = UOC.UserId;
 SELECT * FROM Users
 -- TRUNCATE TABLE Users;
 
-/*
-var query = from b in context.Brands
-            join c in context.Cars
-            on b.BrandName equals brandName
-            join color in context.Colors
-            on c.ColorId equals color.ColorId
-            where c.BrandId == b.BrandId
-            select new CarByBrandDto
-            {
-                Id = c.Id,
-                BrandName = b.BrandName,
-                ColorName = color.ColorName,
-                DailyPrice = c.DailyPrice,
-                ModelYear = c.ModelYear,
-                Descriptions = c.Descriptions
-*/
+SELECT * FROM Cars
+SELECT * FROM Brands
+SELECT * FROM Colors
+SELECT * FROM CarImages
 
-SELECT * FROM Cars c 
-join  Brands b 
-on b.BrandName = 'BMW'
-join Colors color
-on c.ColorId = color.ColorId
-where c.BrandId = b.BrandId
+SELECT * FROM Cars C
+JOIN Brands B
+ON C.BrandId = B.BrandId
+JOIN Colors CLR
+ON C.ColorId = CLR.ColorId
+
+
