@@ -50,6 +50,42 @@ namespace DataAccess.ConCreate.EntityFramework
             }
         }
 
+        public RentalOfCar GetByCarId(int id)
+        {
+            using (CarProjectContext context = new CarProjectContext())
+            {
+                var result = from r in context.Rentals
+                             join c in context.Cars
+                             on r.CarId equals c.Id
+
+                             join b in context.Brands
+                             on c.BrandId equals b.BrandId
+
+                             join customer in context.Customers
+                             on r.CustomerId equals customer.CustomerId
+
+                             join color in context.Colors
+                             on c.ColorId equals color.ColorId
+
+                             join user in context.Users
+                             on customer.UserId equals user.UsersId
+                             where r.CarId == id
+                             select new RentalOfCar
+                             {
+                                 CarId = c.Id,
+                                 RentalsId = r.RentalsId,
+                                 brandName = b.BrandName,
+                                 colorName = color.ColorName,
+                                 userName = user.FirstName + " " + user.LastName,
+                                 RentDate = r.RentDate,
+                                 ReturnDate = r.ReturnDate
+                             };
+
+                return result.FirstOrDefault();
+
+            }
+        }
+
         public RentalDetailDto GetRentalByBrandModel(string brandModel)
         {
             using (CarProjectContext context = new CarProjectContext())
@@ -101,5 +137,7 @@ namespace DataAccess.ConCreate.EntityFramework
                 return result.ToList();
             }
         }
+
+
     }
 }

@@ -18,5 +18,6 @@ namespace Business.Abstract
         IResult delete(Rental entity);
         IDataResult<List<Rental>> GetAll();
         IDataResult<Rental> GetById(Rental entity);
+        IDataResult<RentalOfCar> GetByCarId(int id);
     }
 }

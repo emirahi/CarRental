@@ -54,6 +54,17 @@ namespace WebApi.Controllers
             return BadRequest();
         }
 
+        [HttpGet("GetByCarId")]
+        public IActionResult GetByCarId(int id)
+        {
+            var result = _rantalService.GetByCarId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest();
+        }
+
         [HttpPost("Add")]
         public IActionResult Add(Rental rental)
         {

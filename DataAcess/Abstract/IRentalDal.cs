@@ -12,5 +12,6 @@ namespace DataAccess.Abstract
         List<RentalDetailDto> GetRentalDetails();
         RentalDetailDto GetRentalByBrandModel(string brandModel);
         List<RentalOfCar> GetAllRentalOfCars();
+        RentalOfCar GetByCarId(int id);
     }
 }

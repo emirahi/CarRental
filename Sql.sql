@@ -91,6 +91,9 @@ VALUES
 	(3, 4, 2019, 4650, 'ALFA ROMEO GIULA V4'),
 	(3, 5, 2020, 5650, 'ALFA ROMEO GIULA V5');
 
+INSERT INTO Users (FirstName,LastName,Email,Status) VALUES
+('Mevlânâ Celâleddîn-i','Rûmî','mevlana.rumi@gmail.com',1),
+('Emir','Ahi','emirahi45@gmail.com',1)
 
 INSERT INTO Brands(BrandName)
 VALUES
@@ -110,8 +113,8 @@ VALUES ('Şirket1',1),
 
 INSERT INTO Rentals(CarId,CustomerId,RentDate,ReturnDate)
 VALUES 
-(1,2,CAST('2021-02-15' AS datetime),null),
-(2,1,CAST('2021-02-22' AS datetime),null)
+(1,2,CAST('2021-02-15' AS datetime),CAST('2021-02-25' AS datetime)),
+(2,1,CAST('2021-02-22' AS datetime),CAST('2021-03-30' AS datetime))
 
 
 SELECT * FROM Cars;
@@ -158,4 +161,31 @@ ON C.BrandId = B.BrandId
 JOIN Colors CLR
 ON C.ColorId = CLR.ColorId
 
+SELECT * FROM RENTALS
+SELECT * FROM Users
+
+SELECT r.RentalsId,r.RentDate,r.ReturnDate,c.Descriptions FROM Rentals R
+JOIN Cars C
+ON R.CarId = C.Id
+JOIN Brands B
+ON C.BrandId = b.BrandId
+JOIN Customers CUS
+ON R.CustomerId = CUS.CustomerId
+JOIN Colors COL
+ON COL.ColorId = C.ColorId
+JOIN Users U
+ON U.UsersId = CUS.UserId
+
+/*  from r in context.Rentals
+	join c in context.Cars
+	on r.CarId equals c.Id
+	join b in context.Brands
+	on c.BrandId equals b.BrandId
+	join customer in context.Customers
+	on r.CustomerId equals customer.CustomerId
+	join color in context.Colors
+	on  c.ColorId equals color.ColorId
+	join user in context.Users
+	on customer.UserId equals user.UsersId
+*/
 

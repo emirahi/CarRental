@@ -39,6 +39,12 @@ namespace Business.ConCreate
             return new SuccessDataResult<List<RentalOfCar>>(_rentalDal.GetAllRentalOfCars());
         }
 
+        public IDataResult<RentalOfCar> GetByCarId(int id)
+        {
+            return new SuccessDataResult<RentalOfCar>(_rentalDal.GetByCarId(id));
+
+        }
+
         public IDataResult<Rental> GetById(Rental entity)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalsId == entity.RentalsId));
