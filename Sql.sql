@@ -51,6 +51,21 @@ RentDate Datetime,
 ReturnDate Datetime
 )
 
+/* !!!!!!!! NORMALDE BU TAR VERİYİ AÇIK BİR ŞEKİLDE TUTMAK PEK SAĞLIKLI OLMAZ !!!!!!!!*/
+/* çok uzatmak istemedim :) */
+CREATE TABLE Cards (
+Id INT PRIMARY KEY IDENTITY(1,1),
+UserId INT NOT NULL,
+CreditCard VARCHAR(16) NOT NULL,
+CVV VARCHAR(3) NOT NULL
+);
+
+CREATE TABLE Payments(
+Id INT PRIMARY KEY IDENTITY(1,1),
+CardId INT NOT NULL,
+Success BIT NOT NULL
+);
+
 /* CarImages (Araba Resimleri) tablosu oluşturunuz. (Id,CarId,ImagePath,Date) Bir arabanın birden fazla resmi olabilir.
  */
  CREATE TABLE CarImages(
@@ -116,6 +131,15 @@ VALUES
 (1,2,CAST('2021-02-15' AS datetime),CAST('2021-02-25' AS datetime)),
 (2,1,CAST('2021-02-22' AS datetime),CAST('2021-03-30' AS datetime))
 
+INSERT INTO Cards (UserId,CreditCard,CVV) VALUES
+(1,'1234567890987654','123'),
+(2,'4771551993169797','553'),
+(1,'5450711743458719','278');
+
+INSERT INTO Payments (CardId,Success) VALUES
+(1,1),
+(2,1),
+(3,0)
 
 SELECT * FROM Cars;
 SELECT * FROM Brands;
@@ -125,7 +149,9 @@ SELECT * FROM UserOperationClaims;
 SELECT * FROM OperationClaims;
 SELECT * FROM Customers;
 SELECT * FROM Rentals;
-Select * FROM CarImages;
+SELECT * FROM CarImages;
+SELECT * FROM Cards;
+SELECT * FROM Payments;
 
 /* 2 tablo birleştirme kısaca join işlemi */
 SELECT CompanyName,FirstName,LastName,Email,Password 
@@ -176,16 +202,8 @@ ON COL.ColorId = C.ColorId
 JOIN Users U
 ON U.UsersId = CUS.UserId
 
-/*  from r in context.Rentals
-	join c in context.Cars
-	on r.CarId equals c.Id
-	join b in context.Brands
-	on c.BrandId equals b.BrandId
-	join customer in context.Customers
-	on r.CustomerId equals customer.CustomerId
-	join color in context.Colors
-	on  c.ColorId equals color.ColorId
-	join user in context.Users
-	on customer.UserId equals user.UsersId
-*/
+SELECT * FROM Users;
+SELECT * FROM Cards;
+SELECT * FROM Payments;
+
 
