@@ -80,8 +80,8 @@ namespace DataAccess.ConCreate.EntityFramework
                                  RentDate = r.RentDate,
                                  ReturnDate = r.ReturnDate
                              };
-
-                return result.FirstOrDefault();
+                var data = result.FirstOrDefault();
+                return data;
 
             }
         }

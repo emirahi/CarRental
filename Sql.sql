@@ -52,18 +52,19 @@ ReturnDate Datetime
 )
 
 /* !!!!!!!! NORMALDE BU TAR VERİYİ AÇIK BİR ŞEKİLDE TUTMAK PEK SAĞLIKLI OLMAZ !!!!!!!!*/
-/* çok uzatmak istemedim :) */
 CREATE TABLE Cards (
 Id INT PRIMARY KEY IDENTITY(1,1),
 UserId INT NOT NULL,
+FullName VARCHAR(100),
 CreditCard VARCHAR(16) NOT NULL,
+ExpiryDate VARCHAR(6),
 CVV VARCHAR(3) NOT NULL
 );
 
 CREATE TABLE Payments(
 Id INT PRIMARY KEY IDENTITY(1,1),
 CardId INT NOT NULL,
-Success BIT NOT NULL
+Status BIT NOT NULL
 );
 
 /* CarImages (Araba Resimleri) tablosu oluşturunuz. (Id,CarId,ImagePath,Date) Bir arabanın birden fazla resmi olabilir.
@@ -131,12 +132,12 @@ VALUES
 (1,2,CAST('2021-02-15' AS datetime),CAST('2021-02-25' AS datetime)),
 (2,1,CAST('2021-02-22' AS datetime),CAST('2021-03-30' AS datetime))
 
-INSERT INTO Cards (UserId,CreditCard,CVV) VALUES
-(1,'1234567890987654','123'),
-(2,'4771551993169797','553'),
-(1,'5450711743458719','278');
+INSERT INTO Cards (UserId,FullName,CreditCard,ExpiryDate,CVV) VALUES
+(1,'Emir Ahi','1234567890987654','12/38','123'),
+(2,'Orhan Kemal','4771551993169797','06/30','553'),
+(1,'Emir Ahi','5450711743458719','07/35','278');
 
-INSERT INTO Payments (CardId,Success) VALUES
+INSERT INTO Payments (CardId,Status) VALUES
 (1,1),
 (2,1),
 (3,0)
@@ -153,6 +154,7 @@ SELECT * FROM CarImages;
 SELECT * FROM Cards;
 SELECT * FROM Payments;
 
+-- truncate table Rentals;
 /* 2 tablo birleştirme kısaca join işlemi */
 SELECT CompanyName,FirstName,LastName,Email,Password 
 FROM Customers c
@@ -190,7 +192,7 @@ ON C.ColorId = CLR.ColorId
 SELECT * FROM RENTALS
 SELECT * FROM Users
 
-SELECT r.RentalsId,r.RentDate,r.ReturnDate,c.Descriptions FROM Rentals R
+SELECT * FROM Rentals R
 JOIN Cars C
 ON R.CarId = C.Id
 JOIN Brands B
@@ -206,4 +208,38 @@ SELECT * FROM Users;
 SELECT * FROM Cards;
 SELECT * FROM Payments;
 
+SELECT * FROM Payments P
+JOIN Cards C 
+ON P.CardId = C.Id
+JOIN Users U
+ON C.UserId = U.UsersId
+WHERE U.Status = 1 AND P.Status = 1
 
+SELECT * FROM Rentals
+
+/*
+from r in context.Rentals
+join c in context.Cars
+on r.CarId equals c.Id
+join b in context.Brands
+on c.BrandId equals b.BrandId
+join customer in context.Customers
+on r.CustomerId equals customer.CustomerId
+join color in context.Colors
+on c.ColorId equals color.ColorId
+join user in context.Users
+on customer.UserId equals user.UsersId
+where r.CarId == id
+*/
+SELECT * FROM Rentals R
+JOIN Cars C
+ON R.CarId = C.Id
+JOIN Brands B
+ON C.BrandId = B.BrandId
+JOIN Customers CUS
+ON R.CustomerId = CUS.CustomerId
+JOIN Colors COL
+ON C.ColorId = COL.ColorId
+JOIN Users U
+ON CUS.UserId = U.UsersId
+Where r.CarId = 12

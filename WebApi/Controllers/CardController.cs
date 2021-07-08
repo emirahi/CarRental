@@ -62,5 +62,16 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpPost("IsSuccessCard")]
+        public IActionResult GetAllDto(Card card)
+        {
+            var result = _cardService.IsSuccessCard(card);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

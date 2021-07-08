@@ -20,6 +20,7 @@ namespace Business.ConCreate
         public IResult Add(Rental rental)
         {
             _rentalDal.Add(rental);
+            Console.WriteLine(rental);
             return new SuccessResult();
         }
 
@@ -41,7 +42,13 @@ namespace Business.ConCreate
 
         public IDataResult<RentalOfCar> GetByCarId(int id)
         {
-            return new SuccessDataResult<RentalOfCar>(_rentalDal.GetByCarId(id));
+            var result = _rentalDal.GetByCarId(id);
+            if (!(result is null))
+            {
+                return new SuccessDataResult<RentalOfCar>(result);
+            }
+            return new ErrorDataResult<RentalOfCar>(result);
+            
 
         }
 

@@ -2,6 +2,7 @@
 using Core.Utilities;
 using DataAccess.Abstract;
 using Entity.ConCreate;
+using Entity.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,6 +37,17 @@ namespace Business.ConCreate
                 return new SuccessDataResult<List<Card>>(result);
             }
             return new ErrorDataResult<List<Card>>(result);
+        }
+
+        public IResult IsSuccessCard(Card card)
+        {
+            var result = _cardDal.IsSuccessCard(card);
+            if (result is null)
+            {
+                return new ErrorResult();
+            }
+            return new SuccessResult();
+            
         }
 
         public IResult Update(Card card)

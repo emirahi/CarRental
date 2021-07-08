@@ -9,6 +9,6 @@ namespace Entity.ConCreate
     {
         public int Id { get; set; }
         public int CardId { get; set; }
-        public bool Success { get; set; }
+        public bool Status { get; set; }
     }
 }
