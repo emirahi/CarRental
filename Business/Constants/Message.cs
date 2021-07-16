@@ -20,5 +20,8 @@ namespace Business.Constants
         public static string PasswordError = "Parola Hatalı";
         public static string CarCountLenghtError = "Bu Kriterlerde Araç Mevcut Değil";
         public static string CarNotFound = "Araç Mevcut Değil";
+        public static string ColorAdded = "Renk Eklendi";
+
+        public static string BrandAdded = "Marka Eklendi";
     }
 }

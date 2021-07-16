@@ -30,7 +30,7 @@ namespace WebApi.Controllers
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpGet("GetById")]
@@ -41,7 +41,7 @@ namespace WebApi.Controllers
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("Add")]
@@ -50,9 +50,9 @@ namespace WebApi.Controllers
             var result = _colorService.Add(color);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpGet("Delete")]
@@ -62,9 +62,9 @@ namespace WebApi.Controllers
             var result = _colorService.delete(color);
             if (result.Success)
             {
-                return Ok(result.Success);
+                return Ok(result);
             }
-            return BadRequest(result.Success);
+            return BadRequest(result);
         }
 
         [HttpPost("Update")]
@@ -73,9 +73,9 @@ namespace WebApi.Controllers
             var result = _colorService.update(color);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
     }
 }

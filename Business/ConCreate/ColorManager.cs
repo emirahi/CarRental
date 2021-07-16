@@ -1,4 +1,7 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities;
 using DataAccess.Abstract;
 using Entity.ConCreate;
@@ -16,10 +19,12 @@ namespace Business.ConCreate
         {
             _colorDal = colorDal;
         }
+
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color entity)
         {
             _colorDal.Add(entity);
-            return new SuccessResult();
+            return new SuccessResult(Message.ColorAdded);
         }
 
         public IResult delete(Color entity)
@@ -48,6 +53,7 @@ namespace Business.ConCreate
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == entity.ColorId));
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult update(Color entity)
         {
             _colorDal.Update(entity);
