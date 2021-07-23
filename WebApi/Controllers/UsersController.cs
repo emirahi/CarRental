@@ -62,9 +62,20 @@ namespace WebApi.Controllers
             var result = _userService.delete(user);
             if (result.Success)
             {
-                return Ok(result.Success);
+                return Ok(result);
             }
-            return BadRequest(result.Success);
+            return BadRequest(result);
+        }
+
+        [HttpGet("GetByMail")]
+        public IActionResult GetByUserMail(string email)
+        {
+            var result = _userService.GetByUserMail(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpPost("Update")]

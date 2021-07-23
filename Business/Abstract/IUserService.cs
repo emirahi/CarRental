@@ -1,4 +1,5 @@
-﻿using Core.Utilities;
+﻿using Core.Entities.Dtos;
+using Core.Utilities;
 using Core.Utilities.Business;
 using Entity.ConCreate;
 using Entity.DTOs;
@@ -14,6 +15,7 @@ namespace Business.Abstract
         IDataResult<List<UserDetailDto>> GetUserDetails();
         IDataResult<List<OperationClaim>> GetClaims(User user);
         IDataResult<User> GetByMail(string email);
+        IDataResult<UserDto> GetByUserMail(string email);
         IResult Add(User entity);
         IResult update(User entity);
         IResult delete(User entity);

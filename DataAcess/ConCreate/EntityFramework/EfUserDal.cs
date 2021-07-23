@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Linq.Expressions;
+using Core.Entities.Dtos;
 
 namespace DataAccess.ConCreate.EntityFramework
 {
@@ -39,8 +40,7 @@ namespace DataAccess.ConCreate.EntityFramework
                                  CompanyName = c.CompanyName,
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
-                                 Email = u.Email,
-                                 Password = u.Password
+                                 Email = u.Email
                              };
                 return result.ToList();
             }
@@ -61,13 +61,28 @@ namespace DataAccess.ConCreate.EntityFramework
                                  CompanyName = c.CompanyName,
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
-                                 Email = u.Email,
-                                 Password = u.Password
+                                 Email = u.Email
                              };
                 return result.SingleOrDefault();
             }
         }
 
-     
+        public UserDto GetByUserMail(string email)
+        {
+            using (CarProjectContext context = new CarProjectContext())
+            {
+                var result = from u in context.Users
+                             where u.Email == email
+                             select new UserDto
+                             {
+                                 UsersId = u.UsersId,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName,
+                                 Email = u.Email,
+                                 Status = u.Status
+                             };
+                return result.SingleOrDefault();
+            }
+        }
     }
 }

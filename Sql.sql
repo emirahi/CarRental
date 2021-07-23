@@ -87,6 +87,14 @@ Name VARCHAR(250) NOT NULL
  OperationClaimId INT
  )
 
+ CREATE TABLE Fındesk(
+ Id INT PRIMARY KEY IDENTITY(1,1),
+ UserId INT,
+ NationalIdentity INT,
+ Score INT
+ )
+
+
 INSERT INTO Cars(BrandId, ColorId, ModelYear, DailyPrice, Descriptions)
 VALUES
 	(1, 1, 2016, 1650, 'BMW M2 COMPETITION V1'),
@@ -243,3 +251,4 @@ ON C.ColorId = COL.ColorId
 JOIN Users U
 ON CUS.UserId = U.UsersId
 Where r.CarId = 12
+

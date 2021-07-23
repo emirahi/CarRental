@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Entities.Dtos;
 using Core.Utilities;
 using DataAccess.Abstract;
 using Entity.ConCreate;
@@ -44,14 +46,23 @@ namespace Business.ConCreate
             var getMail = _userDal.Get(u => u.Email == email);
             if(getMail == null)
             {
-                return new ErrorDataResult<User>(getMail);
+                return new ErrorDataResult<User>(Message.UserNotFound,getMail);
             }
-            return new SuccessDataResult<User>(getMail);
+            return new SuccessDataResult<User>(getMail,Message.UserAlreadyExists);
+        }
+
+        public IDataResult<UserDto> GetByUserMail(string user)
+        {
+            var getMail = _userDal.GetByUserMail(user);
+            if (getMail == null)
+            {
+                return new ErrorDataResult<UserDto>(Message.UserNotFound, getMail);
+            }
+            return new SuccessDataResult<UserDto>(getMail, Message.UserAlreadyExists);
         }
 
         public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
-            
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
 

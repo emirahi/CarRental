@@ -1,15 +1,12 @@
-﻿using Core.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entity.DTOs
+namespace Core.Entities.Dtos
 {
-    public class UserDetailDto:IDTO
+    public class UserDto:IDTO
     {
         public int UsersId { get; set; }
-        public int CustomerId { get; set; }
-        public string CompanyName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

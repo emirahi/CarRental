@@ -23,5 +23,9 @@ namespace Business.Constants
         public static string ColorAdded = "Renk Eklendi";
 
         public static string BrandAdded = "Marka Eklendi";
+        public static string creditCardDeleted = "Kredi kartı başarı ile silindi";
+        public static string findeksScoreAdded = "Findeks skorunuz başarı ile eklendi";
+        public static string findeksScoreDelete = "Findeks skorunuz başarı ile silindi";
+        public static string findeksScoreUpdate = "Findeks skorunuz başarı ile güncellendi";
     }
 }
