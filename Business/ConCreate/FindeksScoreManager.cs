@@ -40,7 +40,7 @@ namespace Business.ConCreate
 
         public IDataResult<List<FindeksScore>> GetAll()
         {
-            return new SuccessDataResult<List<FindeksScore>>(_findeksScoreDal.Ge());
+            return new SuccessDataResult<List<FindeksScore>>(_findeksScoreDal.GetALL());
         }
 
         public IDataResult<FindeksScore> GetByCustomerId(int customerId)
